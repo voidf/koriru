@@ -6,7 +6,7 @@
 Please install these packages before running the py script:numpy,pillow,requests,progressbar2
 
 # +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-# koriru是用于在bilibili直播间进行自动领取银瓜子操作的脚本程序。
+# koriru是用于bilibili直播间自动领取银瓜子的脚本程序。
 
 # 界面展示：
 
