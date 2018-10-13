@@ -26,7 +26,7 @@ A：如果您使用chrome内核的浏览器，进入哔哩哔哩直播任一房�
 Q:学习开关有什么用？
 
 A:学习开关是控制koriru在进行正确的验证码识别后是否保存当前已识别数字图片的控件。选择开启会让koriru讲本次识别结果保存至“学习”文件夹，可能会占据少量磁盘空间并且会使下次识别运算变慢。但是足够的样本数据会让koriru识别进行得更精确，目前版本的koriru会在每个数字的样本数量达到10时停止学习。
-
+![study folder](https://github.com/voidf/koriru/blob/master/READMEpic/studyfolder.png)
 当然，您也可以直接禁用学习开关。
 
 ## 挂机状态窗
