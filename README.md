@@ -4,3 +4,10 @@
 # Please download the "学习" Folder to the same directory of koriru!
 
 Please install these packages before running the py script:numpy,pillow,requests,progressbar2
+
+# 界面展示：
+
+## 等待cookie输入
+![preview](https://github.com/voidf/koriru/blob/master/READMEpic/askck.png)
+
+## 学习开关
