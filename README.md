@@ -11,3 +11,7 @@ Please install these packages before running the py script:numpy,pillow,requests
 ![preview](https://github.com/voidf/koriru/blob/master/READMEpic/askck.png)
 
 ## 学习开关
+![swi](https://github.com/voidf/koriru/blob/master/READMEpic/studyswitch.png)
+
+## 挂机状态窗
+![status](https://github.com/voidf/koriru/blob/master/READMEpic/statuswin.png)
