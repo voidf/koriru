@@ -5,6 +5,8 @@
 
 Please install these packages before running the py script:numpy,pillow,requests,progressbar2
 
+# +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+
 # 界面展示：
 
 ## 等待cookie输入
@@ -33,3 +35,7 @@ A:学习开关是控制koriru在进行正确的验证码识别后是否保存当
 
 ## 挂机状态窗
 ![status](https://github.com/voidf/koriru/blob/master/READMEpic/statuswin.png)
+
+底下的绿色进度条如果没动或者卡住了可能是发生了BUG。另外Dev版本的命令行如果显示“程序出错，开始备份图像文件”则是发生图片计算错误，请携带当前系统版本，运行环境和所备份错误图片至Issues区进行报告（如果您愿意的话）。
+
+验证码错误是正常情况。
