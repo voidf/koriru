@@ -53,3 +53,6 @@ A:学习开关是控制koriru在进行正确的验证码识别后是否保存当
 打开koriru.py，会发现所有方法都给打在这一个文件里了，所以koriru是一个单文件脚本。~~其实是因为我不会打多文件~~
 
 其中最上面一个方法是dosign，这是一个最简单的方法，用来进行每日签到。
+
+![doSign](https://github.com/voidf/koriru/blob/master/READMEpic/dosign.jpg)
+
