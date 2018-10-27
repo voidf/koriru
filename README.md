@@ -130,3 +130,5 @@ hds里面装的东西其实都是用来模拟用户登录操作签到的一系�
 
 我们先来看一下make_req方法下载的原始验证码图片长什么样：
 
+![dlpng](https://github.com/voidf/koriru/blob/master/READMEpic/downloadRawPng.png)
+
