@@ -12,6 +12,18 @@ import tkinter.filedialog
 import tkinter as tk
 import threading
 import traceback
+def combinePATH(*p):
+	pr=''
+	if pf.system()=="Windows":
+		for i in p:
+			pr+=i+"\\"
+	elif pf.system()=="Linux":
+		for i in p:
+			pr+=i+"/"
+	else:
+		for i in p:
+			pr+=i+"/"
+	return pr[:-1]
 def loadIMG(imgName):
 	if pf.system()=="Windows":
 		return Image.fromarray(imgName)
@@ -169,7 +181,7 @@ def compare_study_and_example(exam_map):
 			TagsLeaderboard=[]
 			#print(study_list)
 			for sample in study_list:
-				file_name=study_dir+'\\'+sample
+				file_name=combinePATH(study_dir,sample)
 				#print(file_name)
 				now=np.array(Image.open(file_name))
 
