@@ -1,6 +1,7 @@
 #分割1时大概会在20~40列，其它数字大概在80~100列
 
 from PIL import Image
+import platform as pf
 import numpy as np
 import os,sys,time,random
 import progressbar
@@ -11,6 +12,14 @@ import tkinter.filedialog
 import tkinter as tk
 import threading
 import traceback
+def loadIMG(imgName):
+	if pf.system()=="Windows":
+		return Image.fromarray(imgName)
+	elif pf.system()=="Linux":
+		return Image.fromarray(np.uint8(imgName))
+	else:
+		return Image.fromarray(np.uint8(imgName))
+
 def dosign(ck):
 	hds={
 			'Accept':'application/json, text/plain, */*',
@@ -26,9 +35,16 @@ def dosign(ck):
 	print(json.loads(requests.get('https://api.live.bilibili.com/sign/doSign',headers=hds).content))
 
 def resource_path(relative_path):
-	p=sys.argv[0]
-	p=p[:p.rfind('\\')+1]
-	return p+relative_path
+	if pf.system()=="Windows":
+		p=sys.argv[0]
+		p=p[:p.rfind('\\')+1]
+		return p+relative_path
+	elif pf.system()=="Linux":
+		relative_path=relative_path.replace("\\","/")
+		return sys.path[0]+relative_path
+	else:
+		relative_path=relative_path.replace("\\","/")
+		return sys.path[0]+relative_path
 	# if hasattr(sys,'_MEIPASS'):
 		# base_path = sys._MEIPASS
 	# else:
@@ -63,7 +79,7 @@ def split_text_on_pic(mmp,cutctr):#从传入矩阵中分割文字，返回两个
 			cut_col=jj
 			break
 
-	a=Image.fromarray(np.uint8(mmp))
+	a=loadIMG(mmp)
 
 	least_color=19260817
 	if cut_col>105 or (cut_col==0 and len(mmp[0]))>105:
@@ -148,7 +164,7 @@ def compare_study_and_example(exam_map):
 					if ii+mr>=250 or jj-mov_c>=250:
 						continue
 					source_init_idx[ii+mr][jj+mc]=arrsplited[ii][jj]
-			source_init=Image.fromarray(np.uint8(source_init_idx))	
+			source_init=loadIMG(source_init_idx)
 			DistLeaderboard=[]
 			TagsLeaderboard=[]
 			#print(study_list)
@@ -170,7 +186,7 @@ def compare_study_and_example(exam_map):
 							continue
 						study_init_idx[ii+mr][jj+mc]=now[ii][jj]*255#如果去掉这个*255了话预览效果会很不好
 
-				study_init=Image.fromarray(np.uint8(study_init_idx))
+				study_init=loadIMG(study_init_idx)
 				DistLeaderboard.append(sum(sum((source_init_idx-study_init_idx)**2)))
 				TagsLeaderboard.append(sample[:1])
 			
@@ -220,7 +236,7 @@ def rotate_check(mmp):#检查旋转方法，传入一个矩阵，返回旋转以
 	leastmap=mmp
 	if fst_col<last_col:
 		for rotdeg in range(1,50):
-			tp_map=np.array(Image.fromarray(np.uint8(mmp)).rotate(rotdeg))
+			tp_map=np.array(loadIMG(mmp).rotate(rotdeg))
 			fst_raw,fst_col,last_raw,last_col=figure_fst_and_last(tp_map)
 			if last_raw-fst_raw<leasthei:
 				leasthei=last_raw-fst_raw
@@ -231,7 +247,7 @@ def rotate_check(mmp):#检查旋转方法，传入一个矩阵，返回旋转以
 			
 	else:
 		for rotdeg in range(0,-50,-1):
-			tp_map=np.array(Image.fromarray(np.uint8(mmp)).rotate(rotdeg))
+			tp_map=np.array(loadIMG(mmp).rotate(rotdeg))
 			fst_raw,fst_col,last_raw,last_col=figure_fst_and_last(tp_map)
 			if last_raw-fst_raw<leasthei:
 				leasthei=last_raw-fst_raw
@@ -240,7 +256,7 @@ def rotate_check(mmp):#检查旋转方法，传入一个矩阵，返回旋转以
 			elif last_raw-fst_raw>leasthei:
 				break
 			
-	return Image.fromarray(np.uint8(leastmap)),leastdeg
+	return loadIMG(leastmap),leastdeg
 
 def shadow_split(arrays):#将图片上的灰边分离，用于寻找重心移动图片，传入原图矩阵，传出灰边矩阵
 	w=255
@@ -455,15 +471,15 @@ def deathloop(is_study):
 					new_map[ii-mov_r][jj-mov_c]=zomap[ii][jj]
 					new_png[ii-mov_r][jj-mov_c]=arr[ii][jj]
 				
-			ig=Image.fromarray(np.uint8(new_map))
+			ig=loadIMG(new_map)
 				
 			new_map=np.array(ig.resize((960,320)))
 			new_img,dg=rotate_check(new_map)
 			revis=scan_dark_pixs(new_img)
 			revi=new_img.crop(revis)
-			processed_gp=Image.fromarray(np.uint8(new_png)).resize((960,320)).rotate(dg).crop(revis)
+			processed_gp=loadIMG(new_png).resize((960,320)).rotate(dg).crop(revis)
 			rou_dot_map=check_dot(np.array(processed_gp))
-			rdm_img=Image.fromarray(np.uint8(rou_dot_map)).crop(scan_dark_pixs(Image.fromarray(np.uint8(rou_dot_map))))
+			rdm_img=loadIMG(rou_dot_map).crop(scan_dark_pixs(loadIMG(rou_dot_map)))
 			global dislist
 			distinguish_result,dislist,is_okay=compare_study_and_example(np.array(rdm_img))
 			print('识别计算结果为：',end='')
