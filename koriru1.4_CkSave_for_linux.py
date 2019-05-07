@@ -514,7 +514,7 @@ def deathloop(is_study):
 try:
 	ckf=open(resource_path('LastCK.ck'),'r')
 	conf1=input("使用上次的Cookie？[Use previous cookie?](Y/n)")
-	if conf1!="n" or conf1!="N" or conf1!="no" or conf1!="No" or conf1!="NO" or conf1!="oN":
+	if conf1!="n" and conf1!="N" and conf1!="no" and conf1!="No" and conf1!="NO" and conf1!="oN":
 		for i in ckf:
 			cur_ck=i
 		ckf.close()
@@ -524,12 +524,12 @@ except:
 	cur_ck=input("Cookie:")
 	conf1=input("保存Cookie吗?[Save cookie?](Y/n)")
 
-	if conf1!="n" or conf1!="N" or conf1!="no" or conf1!="No" or conf1!="NO" or conf1!="oN":
+	if conf1!="n" and conf1!="N" and conf1!="no" and conf1!="No" and conf1!="NO" and conf1!="oN":
 		with open(resource_path('LastCK.ck'),'w') as ckf:
 			ckf.write(cur_ck)
 
 conf1=input("学习开关?[Enable auto study?](y/N)")
-if conf1!="y" or conf1!="Y":
+if conf1!="y" and conf1!="Y":
 	enable_study=0
 else:
 	enable_study=1
