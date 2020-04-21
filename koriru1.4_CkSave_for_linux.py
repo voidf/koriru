@@ -8,8 +8,8 @@ import progressbar
 import copy as cp
 import requests
 import json,base64
-import tkinter.filedialog
-import tkinter as tk
+#import tkinter.filedialog
+#import tkinter as tk
 import threading
 import traceback
 def combinePATH(*p):
